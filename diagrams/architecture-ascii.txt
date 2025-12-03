@@ -1,0 +1,22 @@
+ +----------------+      +----------------+      +----------------+
+ | spark-master   | <--> | spark-worker-1 |      | spark-worker-2 |
+ | (container)    |      | (container)    |      | (container)    |
+ +----------------+      +----------------+      +----------------+
+         ^                      ^                      ^
+         |                      |                      |
+         +----------------------------------------------+
+                             |
+                       +----------------+
+                       | spark-worker-3 |
+                       | (container)    |
+                       +----------------+
+
+                       +----------------+
+                       |    MLflow      |
+                       | (container)    |
+                       +----------------+
+
+Interaction:
+- Spark master manages 3 worker nodes (cluster).
+- MLflow tracks runs logged from the training script.
+- The Python training script runs inside the MLflow container and logs to the MLflow server.
